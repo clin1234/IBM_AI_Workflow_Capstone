@@ -1,4 +1,4 @@
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/clin1234/https://github.com/clin1234/IBM_AI_Workflow_Capstone?style=flat-square)
+[![Docker Image CI](https://github.com/clin1234/IBM_AI_Workflow_Capstone/actions/workflows/docker-image.yml/badge.svg)](https://github.com/clin1234/IBM_AI_Workflow_Capstone/actions/workflows/docker-image.yml)
 # Project Execution Instructions
 ## Run the model directly
 
