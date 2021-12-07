@@ -1,4 +1,4 @@
-[![Docker Image CI](https://github.com/clin1234/IBM_AI_Workflow_Capstone/actions/workflows/docker-image.yml/badge.svg)](https://github.com/clin1234/IBM_AI_Workflow_Capstone/actions/workflows/docker-image.yml)
+[![Docker Image CI](https://github.com/clin1234/IBM_AI_Workflow_Capstone/actions/workflows/test-docker-image.yml/badge.svg)](https://github.com/clin1234/IBM_AI_Workflow_Capstone/actions/workflows/test-docker-image.yml)
 # Project Execution Instructions
 ## Run the model directly
 
