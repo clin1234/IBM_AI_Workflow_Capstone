@@ -102,21 +102,25 @@ def logs(filename):
     API endpoint to get logs
     """
 
-    if not re.search(".log", filename):
-        print("ERROR: API (log): file requested was not a log file: {}".format(filename))
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+\.log", filename):
+        print("ERROR: API (log): file requested was not a valid log file: {}".format(filename))
         return jsonify([])
 
-    log_dir = os.path.join(".", "log")
+    log_dir = os.path.realpath(os.path.join(".", "log"))
     if not os.path.isdir(log_dir):
         print("ERROR: API (log): cannot find log dir")
         return jsonify([])
 
-    file_path = os.path.join(log_dir, filename)
+    file_path = os.path.realpath(os.path.join(log_dir, filename))
+    if os.path.commonpath([log_dir, file_path]) != log_dir:
+        print("ERROR: API (log): invalid file path requested: {}".format(filename))
+        return jsonify([])
+
     if not os.path.exists(file_path):
         print("ERROR: API (log): file requested could not be found: {}".format(filename))
         return jsonify([])
 
-    return send_from_directory(log_dir, filename, as_attachment=True)
+    return send_from_directory(log_dir, os.path.basename(file_path), as_attachment=True)
 
 
 if __name__ == '__main__':
