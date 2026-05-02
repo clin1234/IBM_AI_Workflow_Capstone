@@ -111,16 +111,19 @@ def logs(filename):
         print("ERROR: API (log): cannot find log dir")
         return jsonify([])
 
-    file_path = os.path.realpath(os.path.join(log_dir, filename))
-    if os.path.commonpath([log_dir, file_path]) != log_dir:
-        print("ERROR: API (log): invalid file path requested: {}".format(filename))
-        return jsonify([])
+    safe_filename = None
+    for candidate in os.listdir(log_dir):
+        candidate_path = os.path.join(log_dir, candidate)
+        if os.path.isfile(candidate_path) and re.fullmatch(r"[A-Za-z0-9_.-]+\.log", candidate):
+            if candidate == filename:
+                safe_filename = candidate
+                break
 
-    if not os.path.exists(file_path):
+    if safe_filename is None:
         print("ERROR: API (log): file requested could not be found: {}".format(filename))
         return jsonify([])
 
-    return send_from_directory(log_dir, os.path.basename(file_path), as_attachment=True)
+    return send_from_directory(log_dir, safe_filename, as_attachment=True)
 
 
 if __name__ == '__main__':
