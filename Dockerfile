@@ -1,6 +1,4 @@
-# No precompiled wheel for scikit-learn beyond Python 3.9.
-# Building one within Docker for Python 3.10 takes too long.
-FROM python:3.9-slim
+FROM python:3.14-slim
 
 RUN apt-get update
 
